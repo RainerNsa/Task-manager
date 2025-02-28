@@ -83,7 +83,7 @@ root/
 ### **Requisite Documentation**
 
 #### **1. README.md**
-```markdown
+
 # Task Management Application
 
 A modern, accessible, and performant task management application built with Next.js, TypeScript, and Tailwind CSS.
