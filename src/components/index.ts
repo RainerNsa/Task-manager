@@ -1,0 +1,6 @@
+export { default as TaskList } from './TaskList'
+export { default as TaskItem } from './TaskItem'
+export { default as AddTaskForm } from './AddTaskForm'
+export { default as TaskModal } from './TaskModal'
+export { default as FilterSortBar } from './FilterSortBar'
+export { default as ErrorBoundary } from './ErrorBoundary'
