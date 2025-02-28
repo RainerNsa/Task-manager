@@ -107,7 +107,7 @@ A modern, accessible, and performant task management application built with Next
 ## Setup
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/task-manager.git
+   git clone https://github.com/RainerNsa/task-manager.git
    cd task-manager
    ```
 
