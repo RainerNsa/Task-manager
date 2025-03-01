@@ -25,17 +25,16 @@ jest.mock('@/store/taskStore', () => ({
 }));
 
 beforeEach(() => {
-  // Mock the implementation with proper types
-  useTaskStore.mockImplementation((selector: (state: TaskStoreState) => Partial<TaskStoreState>) => {
-    const mockState: TaskStoreState = {
-      tasks: [],
-      addTask: jest.fn(),
-      updateTask: jest.fn(),
-      deleteTask: jest.fn(),
-      searchTerm: '',
-      setSearchTerm: jest.fn(),
-      getFilteredTasks: () => [],
-    };
-    return selector(mockState);
-  });
+  const mockState: TaskStoreState = {
+    tasks: [],
+    addTask: jest.fn(),
+    updateTask: jest.fn(),
+    deleteTask: jest.fn(),
+    searchTerm: '',
+    setSearchTerm: jest.fn(),
+    getFilteredTasks: () => [],
+  };
+
+  // Cast to unknown first, then to jest.Mock to resolve the type mismatch.
+  ((useTaskStore as unknown) as jest.Mock<TaskStoreState>).mockImplementation(() => mockState);
 });

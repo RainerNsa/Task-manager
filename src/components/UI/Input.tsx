@@ -1,28 +1,46 @@
-import { InputHTMLAttributes, TextareaHTMLAttributes } from 'react'
+'use client';
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  label?: string
-  type?: 'text' | 'date' | 'textarea'
+import { ChangeEvent } from 'react';
+
+interface InputProps {
+  label: string;
+  type?: 'text' | 'email' | 'password' | 'textarea' | 'date'; // Add 'email' and 'password'
+  value: string;
+  onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  placeholder?: string;
+  required?: boolean;
+  id?: string;
 }
 
-export const Input = ({ label, type = 'text', ...props }: InputProps) => {
-  const inputStyles = 'w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+export const Input = ({ label, type = 'text', value, onChange, placeholder, required, id, }: InputProps) => {
+  if (type === 'textarea') {
+    return (
+      <div className="space-y-1">
+        <label className="block text-sm font-medium">{label}</label>
+        <textarea
+          id={id}
+          value={value}
+          onChange={onChange}
+          placeholder={placeholder}
+          required={required}
+          className="w-full p-2 border rounded"
+        />
+      </div>
+    );
+  }
 
   return (
-    <div className="space-y-2">
-      {label && <label className="block text-sm font-medium">{label}</label>}
-      {type === 'textarea' ? (
-        <textarea
-          {...(props as TextareaHTMLAttributes<HTMLTextAreaElement>)}
-          className={`${inputStyles} min-h-[100px]`}
-        />
-      ) : (
-        <input
-          {...props}
-          type={type}
-          className={inputStyles}
-        />
-      )}
+    <div className="space-y-1">
+      <label className="block text-sm font-medium">{label}</label>
+      <input
+        id={id}
+        type={type}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        required={required}
+        className="w-full p-2 border rounded"
+      />
     </div>
-  )
-}
+  );
+};

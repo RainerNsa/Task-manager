@@ -36,6 +36,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        {/* Add this for the modal portal */}
+        <div id="modal-root" />
         {/* Wrap your components with the provider */}
         <AuthProvider>
           <ToastProvider />
