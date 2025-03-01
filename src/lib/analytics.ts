@@ -1,16 +1,16 @@
-import { ReportHandler } from 'web-vitals'
+import { Metric } from 'web-vitals';
 
-const reportWebVitals = (onPerfEntry?: ReportHandler) => {
+const reportWebVitals = (onPerfEntry?: (metric: Metric) => void) => {
   if (onPerfEntry && typeof onPerfEntry === 'function') {
-    import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
-      getCLS(onPerfEntry)
-      getFID(onPerfEntry)
-      getFCP(onPerfEntry)
-      getLCP(onPerfEntry)
-      getTTFB(onPerfEntry)
-    })
+    import('web-vitals').then(({ onCLS, onFID, onFCP, onLCP, onTTFB }) => {
+      onCLS(onPerfEntry);
+      onFID(onPerfEntry);
+      onFCP(onPerfEntry);
+      onLCP(onPerfEntry);
+      onTTFB(onPerfEntry);
+    });
   }
-}
+};
 
 export const sendToAnalytics = ({ name, delta }: { name: string; delta: number }) => {
   if (process.env.NEXT_PUBLIC_GA_TRACKING_ID) {
@@ -19,8 +19,8 @@ export const sendToAnalytics = ({ name, delta }: { name: string; delta: number }
       metric_id: name,
       metric_value: delta,
       metric_delta: delta,
-    })
+    });
   }
-}
+};
 
-export default reportWebVitals
+export default reportWebVitals;

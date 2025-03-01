@@ -1,15 +1,18 @@
-'use client'
+'use client';
 
-import { useTaskStore } from '@/store/taskStore'
-import { Input } from '@/components/UI/Input'
+import { useTaskStore } from '@/store/taskStore';
+import { Input } from '@/components/UI/Input';
+
+// Define the TaskStatus type
+type TaskStatus = 'todo' | 'in-progress' | 'done';
 
 interface FilterSortBarProps {
-  searchTerm?: string
-  onSearchChange?: (term: string) => void
+  searchTerm?: string;
+  onSearchChange?: (term: string) => void;
 }
 
 const FilterSortBar = ({ searchTerm, onSearchChange }: FilterSortBarProps) => {
-  const { filters, setFilters, sortBy, setSortBy } = useTaskStore()
+  const { filters, setFilters, sortBy, setSortBy } = useTaskStore();
 
   return (
     <div className="bg-white p-4 rounded-lg shadow-md mb-4">
@@ -27,7 +30,9 @@ const FilterSortBar = ({ searchTerm, onSearchChange }: FilterSortBarProps) => {
             <select
               className="w-full p-2 border rounded"
               value={filters.status || ''}
-              onChange={(e) => setFilters({ ...filters, status: e.target.value as TaskStatus })}
+              onChange={(e) =>
+                setFilters({ ...filters, status: e.target.value as TaskStatus })
+              }
             >
               <option value="">All Statuses</option>
               <option value="todo">To Do</option>
@@ -42,7 +47,9 @@ const FilterSortBar = ({ searchTerm, onSearchChange }: FilterSortBarProps) => {
           <select
             className="w-full p-2 border rounded"
             value={sortBy}
-            onChange={(e) => setSortBy(e.target.value as 'dueDate' | 'priority')}
+            onChange={(e) =>
+              setSortBy(e.target.value as 'dueDate' | 'priority')
+            }
           >
             <option value="dueDate">Due Date</option>
             <option value="priority">Priority</option>
@@ -50,7 +57,7 @@ const FilterSortBar = ({ searchTerm, onSearchChange }: FilterSortBarProps) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default FilterSortBar
+export default FilterSortBar;

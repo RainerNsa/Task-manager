@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { FixedSizeList as List } from 'react-window'
 import TaskItem from './TaskItem/TaskItem'

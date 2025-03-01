@@ -1,29 +1,33 @@
-'use client'
+'use client';
 
-import { useState, useEffect } from 'react'
-import { Task } from '@/types/task'
-import { useTaskStore } from '@/store/taskStore'
-import Modal from '@/components/UI/Modal'
-import { Button } from '@/components/UI/Button'
-import { Input } from '@/components/UI/Input'
+import { useState, useEffect } from 'react';
+import { Task } from '@/types/task';
+import { useTaskStore } from '@/store/taskStore';
+import { Modal } from '@/components/UI/Modal';
+import { Button } from '@/components/UI/Button';
+import { Input } from '@/components/UI/Input';
+
+// Define the TaskStatus and TaskPriority types
+type TaskStatus = 'todo' | 'in-progress' | 'done';
+type TaskPriority = 'low' | 'medium' | 'high';
 
 const TaskModal = ({ task, onClose }: { task: Task | null; onClose: () => void }) => {
-  const [editedTask, setEditedTask] = useState<Task | null>(null)
-  const { updateTask } = useTaskStore()
+  const [editedTask, setEditedTask] = useState<Task | null>(null);
+  const { updateTask } = useTaskStore();
 
   useEffect(() => {
-    setEditedTask(task)
-  }, [task])
+    setEditedTask(task);
+  }, [task]);
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     if (editedTask) {
-      updateTask(editedTask.id, editedTask)
-      onClose()
+      updateTask(editedTask.id, editedTask);
+      onClose();
     }
-  }
+  };
 
-  if (!editedTask) return null
+  if (!editedTask) return null;
 
   return (
     <Modal isOpen={!!task} onClose={onClose} title="Edit Task">
@@ -31,14 +35,14 @@ const TaskModal = ({ task, onClose }: { task: Task | null; onClose: () => void }
         <Input
           label="Title"
           value={editedTask.title}
-          onChange={(e) => setEditedTask({...editedTask, title: e.target.value})}
+          onChange={(e) => setEditedTask({ ...editedTask, title: e.target.value })}
         />
-        
+
         <Input
           label="Description"
           type="textarea"
           value={editedTask.description}
-          onChange={(e) => setEditedTask({...editedTask, description: e.target.value})}
+          onChange={(e) => setEditedTask({ ...editedTask, description: e.target.value })}
         />
 
         <div className="grid grid-cols-2 gap-4">
@@ -47,7 +51,9 @@ const TaskModal = ({ task, onClose }: { task: Task | null; onClose: () => void }
             <select
               className="w-full p-2 border rounded"
               value={editedTask.status}
-              onChange={(e) => setEditedTask({...editedTask, status: e.target.value as TaskStatus})}
+              onChange={(e) =>
+                setEditedTask({ ...editedTask, status: e.target.value as TaskStatus })
+              }
             >
               <option value="todo">To Do</option>
               <option value="in-progress">In Progress</option>
@@ -60,7 +66,9 @@ const TaskModal = ({ task, onClose }: { task: Task | null; onClose: () => void }
             <select
               className="w-full p-2 border rounded"
               value={editedTask.priority}
-              onChange={(e) => setEditedTask({...editedTask, priority: e.target.value as TaskPriority})}
+              onChange={(e) =>
+                setEditedTask({ ...editedTask, priority: e.target.value as TaskPriority })
+              }
             >
               <option value="low">Low</option>
               <option value="medium">Medium</option>
@@ -73,20 +81,18 @@ const TaskModal = ({ task, onClose }: { task: Task | null; onClose: () => void }
           label="Due Date"
           type="date"
           value={editedTask.dueDate}
-          onChange={(e) => setEditedTask({...editedTask, dueDate: e.target.value})}
+          onChange={(e) => setEditedTask({ ...editedTask, dueDate: e.target.value })}
         />
 
         <div className="flex justify-end gap-2">
           <Button type="button" variant="secondary" onClick={onClose}>
             Cancel
           </Button>
-          <Button type="submit">
-            Save Changes
-          </Button>
+          <Button type="submit">Save Changes</Button>
         </div>
       </form>
     </Modal>
-  )
-}
+  );
+};
 
-export default TaskModal
+export default TaskModal;

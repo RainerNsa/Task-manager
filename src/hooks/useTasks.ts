@@ -2,14 +2,16 @@ import { useEffect } from 'react';
 import { useTaskStore } from '@/store/taskStore';
 
 export const useTasks = () => {
-  const { getFilteredTasks, ...rest } = useTaskStore(); // Remove `tasks` from destructuring
+  // Rename `tasks` to `originalTasks` during destructuring
+  const { tasks: originalTasks, getFilteredTasks, ...rest } = useTaskStore();
 
   useEffect(() => {
     // Initialization logic if needed
   }, []);
 
   return {
-    tasks: getFilteredTasks(),
-    ...rest,
+    tasks: getFilteredTasks(), // Explicitly return filtered tasks
+    originalTasks, // Include the original tasks if needed
+    ...rest, // Spread the remaining properties
   };
 };
