@@ -1,15 +1,15 @@
-import { useEffect } from 'react'
-import { useTaskStore } from '@/store/taskStore'
+import { useEffect } from 'react';
+import { useTaskStore } from '@/store/taskStore';
 
 export const useTasks = () => {
-  const { tasks, getFilteredTasks, ...rest } = useTaskStore()
-  
+  const { getFilteredTasks, ...rest } = useTaskStore(); // Remove `tasks` from destructuring
+
   useEffect(() => {
     // Initialization logic if needed
-  }, [])
+  }, []);
 
   return {
     tasks: getFilteredTasks(),
-    ...rest
-  }
-}
+    ...rest,
+  };
+};

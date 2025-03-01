@@ -30,9 +30,13 @@ export default function RootLayout({
   // since hooks can't be used directly in Server Components
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/favicon.png" sizes="any" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        {/* Wrap your components with the provider */}
         <AuthProvider>
           <ToastProvider />
           <Navbar />

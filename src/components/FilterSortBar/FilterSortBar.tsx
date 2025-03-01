@@ -3,16 +3,21 @@
 import { useTaskStore } from '@/store/taskStore'
 import { Input } from '@/components/UI/Input'
 
-const FilterSortBar = () => {
-  const { searchTerm, setSearchTerm, filters, setFilters, sortBy, setSortBy } = useTaskStore()
+interface FilterSortBarProps {
+  searchTerm?: string
+  onSearchChange?: (term: string) => void
+}
+
+const FilterSortBar = ({ searchTerm, onSearchChange }: FilterSortBarProps) => {
+  const { filters, setFilters, sortBy, setSortBy } = useTaskStore()
 
   return (
     <div className="bg-white p-4 rounded-lg shadow-md mb-4">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <Input
           label="Search Tasks"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          value={searchTerm || ''}
+          onChange={(e) => onSearchChange?.(e.target.value)}
           placeholder="Search by title or description..."
         />
 

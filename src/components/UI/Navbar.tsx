@@ -24,7 +24,7 @@ export default function Navbar() {
             <Link href="/" className="flex-shrink-0">
               <Image
                 className="h-8 w-auto"
-                src="/images/logo.png"
+                src="/public/file.svg"
                 alt="Logo"
                 width={32} // Matching the height of 8 (h-8 = 32px)
                 height={32}
