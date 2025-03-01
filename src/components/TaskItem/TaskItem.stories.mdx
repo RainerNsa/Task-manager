@@ -1,0 +1,32 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs'
+import TaskItem from './TaskItem'
+
+<Meta title="Components/TaskItem" component={TaskItem} />
+
+# TaskItem Component
+
+Displays an individual task with its details and actions.
+
+## Props
+
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| task | `Task` | Yes | The task object to display |
+
+## Usage
+
+```tsx
+import TaskItem from '@/components/TaskItem'
+
+function Example() {
+  const task = {
+    id: '1',
+    title: 'Example Task',
+    description: 'This is an example task',
+    dueDate: '2023-08-31',
+    priority: 'medium',
+    status: 'todo'
+  }
+
+  return <TaskItem task={task} />
+}

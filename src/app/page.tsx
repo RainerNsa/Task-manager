@@ -1,10 +1,10 @@
 'use client'
 
 import { useTasks } from '@/hooks/useTasks'
-import TaskList from '@/components/TaskList'
-import AddTaskForm from '@/components/AddTaskForm'
-import FilterSortBar from '@/components/FilterSortBar'
-import ErrorBoundary from '@/components/ErrorBoundary'
+import TaskList from '@/components/TaskList/TaskList'
+import AddTaskForm from '@/components/AddTaskForm/AddTaskForm'
+import FilterSortBar from '@/components/FilterSortBar/FilterSortBar'
+import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary'
 
 export default function Home() {
   const { tasks, searchTerm, setSearchTerm } = useTasks()

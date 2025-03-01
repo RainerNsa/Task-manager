@@ -1,7 +1,7 @@
 'use client'
 
 import { Component, ErrorInfo, ReactNode } from 'react'
-import toast from 'react-hot-toast'
+import { Button } from '@/components/UI/Button'
 
 interface ErrorBoundaryProps {
   children: ReactNode
@@ -14,36 +14,32 @@ interface ErrorBoundaryState {
 }
 
 class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
-  constructor(props: ErrorBoundaryProps) {
-    super(props)
-    this.state = { hasError: false }
-  }
+  state = { hasError: false, error: undefined }
 
-  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
+  static getDerivedStateFromError(error: Error) {
     return { hasError: true, error }
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('ErrorBoundary caught an error:', error, errorInfo)
-    toast.error(`Something went wrong: ${error.message}`)
+    console.error('Error caught by boundary:', error, errorInfo)
+  }
+
+  handleRetry = () => {
+    this.setState({ hasError: false, error: undefined })
   }
 
   render() {
     if (this.state.hasError) {
       return this.props.fallback || (
-        <div className="p-4 bg-red-50 text-red-700 rounded-lg">
+        <div className="p-4 bg-red-50 rounded-lg text-red-700">
           <h2 className="font-bold mb-2">Something went wrong</h2>
-          <p>{this.state.error?.message}</p>
-          <button
-            onClick={() => this.setState({ hasError: false })}
-            className="mt-2 px-4 py-2 bg-red-100 hover:bg-red-200 rounded"
-          >
+          <p className="mb-4">{this.state.error?.message}</p>
+          <Button onClick={this.handleRetry}>
             Try Again
-          </button>
+          </Button>
         </div>
       )
     }
-
     return this.props.children
   }
 }

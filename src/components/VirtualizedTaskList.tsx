@@ -1,7 +1,7 @@
 'use client'
 
 import { FixedSizeList as List } from 'react-window'
-import TaskItem from './TaskItem'
+import TaskItem from './TaskItem/TaskItem'
 import { Task } from '@/types/task'
 
 const ROW_HEIGHT = 120

@@ -1,5 +1,5 @@
 import { memo, useMemo } from 'react'
-import TaskItem from './TaskItem'
+import TaskItem from '@/components/TaskItem/TaskItem'
 import { Task } from '@/types/task'
 
 interface TaskListProps {

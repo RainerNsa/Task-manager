@@ -1,0 +1,34 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs'
+import TaskList from './TaskList'
+
+<Meta title="Components/TaskList" component={TaskList} />
+
+# TaskList Component
+
+Displays a list of tasks with filtering and sorting capabilities.
+
+## Props
+
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| tasks | `Task[]` | Yes | Array of tasks to display |
+
+## Usage
+
+```tsx
+import TaskList from '@/components/TaskList'
+
+function Example() {
+  const tasks = [
+    {
+      id: '1',
+      title: 'Example Task',
+      description: 'This is an example task',
+      dueDate: '2023-08-31',
+      priority: 'medium',
+      status: 'todo'
+    }
+  ]
+
+  return <TaskList tasks={tasks} />
+}
